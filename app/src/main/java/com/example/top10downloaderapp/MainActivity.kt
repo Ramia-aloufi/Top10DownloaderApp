@@ -3,6 +3,8 @@ package com.example.top10downloaderapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import java.net.HttpURLConnection
 
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var rv:RecyclerView
     lateinit var btn:Button
     val parser = XMLParser()
-
+var url = ""
     lateinit var al:List<AppName>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,26 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mymenu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+
+                R.id.it1 -> { url ="http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml" }
+                R.id.it2 -> {url = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=100/xml"}
+                else -> return super.onOptionsItemSelected(item)
+
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+
+
+
+
     private fun requestApi(){
 
         CoroutineScope(IO).launch {
@@ -58,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     private fun fetchdata():String{
         var response=""
         try {
-            response = URL("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml").readText(Charsets.UTF_8)
+            response = URL(url).readText(Charsets.UTF_8)
         }catch (e: Exception){
             println("Error $e")
         }

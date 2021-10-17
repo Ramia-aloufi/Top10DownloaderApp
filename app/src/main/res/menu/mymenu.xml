@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Top 10 App" android:id="@+id/it1" />
+    <item android:title="Top 100 App" android:id="@+id/it2" />
+</menu>
