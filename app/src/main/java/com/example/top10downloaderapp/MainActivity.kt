@@ -10,6 +10,7 @@ import java.net.HttpURLConnection
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.textcell.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -21,15 +22,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var rv:RecyclerView
     lateinit var btn:Button
     val parser = XMLParser()
-var url = ""
-    lateinit var al:List<AppName>
+var url = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+    lateinit var al:MutableList<AppName>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         rv = findViewById(R.id.recyclerView)
         btn = findViewById(R.id.button)
-        al = listOf()
+        al = mutableListOf()
 
 
         btn.setOnClickListener {
@@ -50,12 +51,30 @@ var url = ""
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
 
-                R.id.it1 -> { url ="http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml" }
-                R.id.it2 -> {url = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=100/xml"}
+                R.id.it1 -> {top10() }
+                R.id.it2 -> {top100()}
                 else -> return super.onOptionsItemSelected(item)
+
 
         }
         return super.onOptionsItemSelected(item)
+
+    }
+
+    fun top10(){
+        url ="http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+        textView.text = "Top 10 App in AppStore"
+        title = "Top 10 App in AppStore"
+        al.clear()
+        rv.adapter?.notifyDataSetChanged()
+    }
+
+    fun top100(){
+        url ="http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=100/xml"
+        textView.text = "Top 100 App in AppStore"
+        title = "Top 100 App in AppStore"
+        al.clear()
+        rv.adapter?.notifyDataSetChanged()
 
     }
 

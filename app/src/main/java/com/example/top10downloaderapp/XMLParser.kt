@@ -10,7 +10,7 @@ data class AppName(val name: String?)
 
 class XMLParser {
     private val ns: String? = null
-    fun parse(inputStream: InputStream): List<AppName> {
+    fun parse(inputStream: InputStream): MutableList<AppName> {
         inputStream.use { inputStream ->
             val parser: XmlPullParser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
@@ -20,7 +20,7 @@ class XMLParser {
         }
     }
 
-    private fun readSongsRssFeed(parser: XmlPullParser): List<AppName> {
+    private fun readSongsRssFeed(parser: XmlPullParser): MutableList<AppName> {
 
         val app = mutableListOf<AppName>()
 

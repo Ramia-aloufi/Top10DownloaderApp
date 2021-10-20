@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.textcell.view.*
 
-class MyAdapter(var item:List<AppName>):RecyclerView.Adapter<MyAdapter.ItemViewHolder>() {
+class MyAdapter(var item:MutableList<AppName>):RecyclerView.Adapter<MyAdapter.ItemViewHolder>() {
     class ItemViewHolder(ItemView: View):RecyclerView.ViewHolder(ItemView) {
 
     }
